@@ -1,0 +1,60 @@
+default:
+  image:
+    name: trendyoltech/kubectl-golang:1.12.7-base
+
+stages:
+  - test
+
+test:integration_deployment_testify:
+  stage: test
+  tags:
+    - terratest
+  only:
+    refs:
+      - master
+    changes:
+      - deployment/testify/*
+  script:
+    - go test -v deployment/testify*
+
+test:integration_deployment_ginkgo:
+  stage: test
+  tags:
+    - terratest
+  only:
+    refs:
+      - master
+    changes:
+      - deployment/ginkgo/*
+  script:
+    - go test -v deployment/ginkgo*
+
+test:integration_helm:
+  stage: test
+  tags:
+    - terratest
+  only:
+    refs:
+      - master
+    changes:
+      - helm/*
+  script:
+    - go test -v helm/*
+
+test:integration_terraform:
+  stage: test
+  image: hashicorp/terraform:full
+  before_script:
+    - cat $TERRAFORMRC >> $HOME/.terraformrc
+    - cat $HOME/.terraformrc
+    - TF_CLI_CONFIG_FILE=$HOME/.terraformrc
+  tags:
+    - terratest
+  only:
+    refs:
+      - master
+    changes:
+      - terraform/*
+  script:
+    - apk add build-base
+    - go test -v terraform/*.go
