@@ -32,7 +32,7 @@ var _ = Describe("When I Deploy Hello-World Service", func() {
 	var serviceURL string
 
 	BeforeAll(func() {
-		SetupKubeconfigEnv()
+		SetupK8sConfig()
 		k8sManifestPath := "../deployment.yaml"
 
 		options := k8s.NewKubectlOptions("", "", "terratest")

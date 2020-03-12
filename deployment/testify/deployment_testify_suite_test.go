@@ -25,7 +25,7 @@ type DeploymentTestSuite struct {
 
 func (s *DeploymentTestSuite) SetupSuite() {
 	/* we setup our KUBECONFIG environment variable to communicate our cluster via kubectl */
-	util.SetupKubeconfigEnv()
+	util.SetupK8sConfig()
 }
 
 func (s *DeploymentTestSuite) TestItShouldGiveOutputAsHelloWorld() {

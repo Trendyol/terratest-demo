@@ -7,11 +7,11 @@ import (
 	"testing"
 )
 
-type HelmTestSuite struct {
+type HelmRenderingSuite struct {
 	suite.Suite
 }
 
-func (s *HelmTestSuite) TestPodTemplateRendersContainerImage() {
+func (s *HelmRenderingSuite) TestPodTemplateRendersContainerImage() {
 
 	helmChartPath := "./charts/minimal-pod"
 
@@ -35,6 +35,6 @@ func (s *HelmTestSuite) TestPodTemplateRendersContainerImage() {
 	}
 }
 
-func TestRunHelmTestSuite(t *testing.T) {
-	suite.Run(t, new(HelmTestSuite))
+func TestHelmRenderingSuite(t *testing.T) {
+	suite.Run(t, new(HelmRenderingSuite))
 }
